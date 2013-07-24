@@ -23,8 +23,20 @@ class MoneyFormatValidator < ActiveModel::EachValidator
     end
     return if value.blank?
 
+    # Need to first convert BigDecimal to floating point representation of string
+    if value.kind_of?(BigDecimal)
+      value = value.to_s("F")
+    end
+
+    # Finally convert any other types to string and clean off whitespace
+    value = value.to_s.strip
+
+    # Regex seems a bit odd to use here (vs converting to BigDeciaml) but we need
+    # to check for values that BigDecimal can't represent (e.g., "badvalue") so
+    # for now this works.
     record.errors.add(attr_name, :money_format, options) unless value =~ MONEY_REGEX
 
+    # Check if value has cents but shouldn't
     if options[:exclude_cents] && value_has_cents?(value)
       record.errors.add(attr_name, :money_format_whole_number)
     end

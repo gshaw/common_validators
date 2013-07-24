@@ -27,6 +27,9 @@ class MoneyFormatValidatorTest < ActiveSupport::TestCase
     assert_invalid_amount "10 20"
     assert_invalid_amount "10.123"
     assert_invalid_amount "1,000.12"
+    assert_invalid_amount "1000000.999"
+    assert_invalid_amount 100.999
+    assert_invalid_amount BigDecimal.new("100.999")
 
     assert_invalid_amount "100.99", :whole_amount
     assert_invalid_amount "100.1", :whole_amount
@@ -34,13 +37,16 @@ class MoneyFormatValidatorTest < ActiveSupport::TestCase
 
   test "valid amount" do
     assert_valid_amount ""
+    assert_valid_amount "0"
     assert_valid_amount "1"
     assert_valid_amount "1.00"
     assert_valid_amount "1.99"
     assert_valid_amount "+1.99"
     assert_valid_amount "-1.99"
-    assert_valid_amount "100000.99"
-    assert_valid_amount "100000.99"
+    assert_valid_amount "100000000.99"
+    assert_valid_amount 100
+    assert_valid_amount 100.99
+    assert_valid_amount BigDecimal.new("100.99")
 
     assert_valid_amount "100.00", :whole_amount
   end
