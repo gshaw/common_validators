@@ -2,7 +2,7 @@
 
 Collection of common validators for Rails applications.
 
-## Validators
+### Examples
 
 ```
 validates :email,         email_format: true, presence: true
