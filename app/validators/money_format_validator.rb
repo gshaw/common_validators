@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 # Validate fields to look like currency values
 #
 # NOTE: Currently limited to USD/CAD values.
@@ -10,9 +12,6 @@
 #   validates :amount, money_format: true                 # optional
 #   validates :amount, money_format: { exclude_cents: true }
 #   validates :amount, money_format: true, presence: true # required
-
-require 'bigdecimal'
-
 class MoneyFormatValidator < ActiveModel::EachValidator
   MONEY_REGEX = /\A[-+]?\d+(\.\d{1,2})?\z/
 
