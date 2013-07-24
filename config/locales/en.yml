@@ -1,0 +1,9 @@
+en:
+  errors:
+    messages:
+      date_format: "is invalid"
+      email_format: "is invalid"
+      money_format: "is invalid"
+      money_format_whole_dollar: "must be whole dollar amount"
+      slug_format: "is invalid, only lowercase letters and numbers allowed"
+      url_format: "is invalid"
