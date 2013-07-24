@@ -1,6 +1,11 @@
 # CommonValidators
 
+[![Build Status](https://travis-ci.org/gshaw/common_validators.png?branch=master)](https://travis-ci.org/gshaw/common_validators)
+[![Gem Version](https://badge.fury.io/rb/common_validators.png)](http://badge.fury.io/rb/common_validators)
+
 Collection of common validators for Rails applications.
+
+[RubyDoc Documentation](http://rubydoc.info/github/gshaw/common_validators/master/frames)
 
 ### Examples
 
