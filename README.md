@@ -22,7 +22,7 @@ In your ActiveRecord models include one more validations on your model's fields.
 
 Add this line to your application's Gemfile:
 
-    gem 'venture_base'
+    gem 'common_validators'
 
 And then execute:
 
@@ -30,7 +30,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install venture_base
+    $ gem install common_validators
 
 ## Contributing
 
