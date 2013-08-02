@@ -38,7 +38,7 @@ class MoneyFormatValidator < ActiveModel::EachValidator
 
     # Check if value has cents but shouldn't
     if options[:exclude_cents] && value_has_cents?(value)
-      record.errors.add(attr_name, :money_format_whole_number)
+      record.errors.add(attr_name, :money_format_has_cents)
     end
   end
 
