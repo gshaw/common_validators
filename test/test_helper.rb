@@ -1,15 +1,12 @@
+require 'minitest/autorun'
+
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
-require 'test/unit'
-require 'rails'
+require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require "rails/test_help"
 
-class FakeApplication < Rails::Application; end
-
-Rails.application = FakeApplication
-Rails.configuration.action_controller = ActiveSupport::OrderedOptions.new
-
-require 'common_validators'
+Rails.backtrace_cleaner.remove_silencers!
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }

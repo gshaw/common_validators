@@ -1,5 +1,5 @@
 require 'test_helper'
-require File.expand_path("../../app/validators/phone_number_format_validator",  __FILE__)
+require File.expand_path("../../../app/validators/phone_number_format_validator",  __FILE__)
 
 class TestModel
   include ActiveModel::Validations
@@ -18,7 +18,7 @@ class PhoneNumberFormatValidatorTest < ActiveSupport::TestCase
   def assert_invalid_phone_number(phone_number)
     t = TestModel.new
     t.phone_number = phone_number
-    assert !t.valid?, "Phone number `#{phone_number}` should be invalid"
+    refute t.valid?, "Phone number `#{phone_number}` should be invalid"
   end
 
   test "invalid phone_number" do

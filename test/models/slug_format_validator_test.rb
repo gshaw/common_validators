@@ -1,5 +1,5 @@
 require 'test_helper'
-require File.expand_path("../../app/validators/slug_format_validator",  __FILE__)
+require File.expand_path("../../../app/validators/slug_format_validator",  __FILE__)
 
 class TestModel
   include ActiveModel::Validations
@@ -18,7 +18,7 @@ class SlugFormatValidatorTest < ActiveSupport::TestCase
   def assert_invalid_slug(slug)
     t = TestModel.new
     t.slug = slug
-    assert !t.valid?, "Slug `#{slug}` should be invalid"
+    refute t.valid?, "Slug `#{slug}` should be invalid"
   end
 
   test "invalid slug" do

@@ -1,5 +1,5 @@
 require 'test_helper'
-require File.expand_path("../../app/validators/money_format_validator",  __FILE__)
+require File.expand_path("../../../app/validators/money_format_validator",  __FILE__)
 
 class TestModel
   include ActiveModel::Validations
@@ -19,7 +19,7 @@ class MoneyFormatValidatorTest < ActiveSupport::TestCase
   def assert_invalid_amount(amount, field = :amount)
     t = TestModel.new
     t.send(:"#{field}=", amount)
-    assert !t.valid?, "Amount `#{amount}` should be invalid"
+    refute t.valid?, "Amount `#{amount}` should be invalid"
   end
 
   test "invalid amount" do

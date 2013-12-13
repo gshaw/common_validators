@@ -1,5 +1,5 @@
 require 'test_helper'
-require File.expand_path("../../app/validators/email_format_validator",  __FILE__)
+require File.expand_path("../../../app/validators/email_format_validator",  __FILE__)
 
 class TestModel
   include ActiveModel::Validations
@@ -18,7 +18,7 @@ class EmailFormatValidatorTest < ActiveSupport::TestCase
   def assert_invalid_email(email)
     t = TestModel.new
     t.email = email
-    assert !t.valid?, "Email `#{email}` should be invalid"
+    refute t.valid?, "Email `#{email}` should be invalid"
   end
 
   test "invalid email" do
