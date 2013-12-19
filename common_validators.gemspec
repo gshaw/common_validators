@@ -19,11 +19,12 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 1.9"
 
-  spec.add_dependency "rails", "~> 3.2"
+  spec.add_dependency "rails", ">= 3.2"
   spec.add_dependency "bigdecimal"
 
   spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "guard-minitest"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "test-unit"
-  spec.add_development_dependency "guard-test"
 end

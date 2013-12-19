@@ -1,5 +1,5 @@
 require 'test_helper'
-require File.expand_path("../../app/validators/url_format_validator",  __FILE__)
+require File.expand_path("../../../app/validators/url_format_validator",  __FILE__)
 
 class TestModel
   include ActiveModel::Validations
@@ -18,7 +18,7 @@ class UrlFormatValidatorTest < ActiveSupport::TestCase
   def assert_invalid_url(url)
     t = TestModel.new
     t.url = url
-    assert !t.valid?, "Url `#{url}` should be invalid"
+    refute t.valid?, "Url `#{url}` should be invalid"
   end
 
   test "invalid url" do
