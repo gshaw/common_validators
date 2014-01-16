@@ -4,13 +4,16 @@ require 'bigdecimal'
 #
 # NOTE: Currently limited to USD/CAD values.
 #
-# Includes an option to limit value to only whole dollar amounts.
+# Options:
+#
+# * `exclude_cents = true|false` determines if amount can have cents (default false)
+# * `allow_negative = true|false` determines if amount can be negative (default false)
 #
 # A blank value is considered valid (use presence validator to check for that)
 #
 # Examples
 #   validates :amount, money_format: true                 # optional
-#   validates :amount, money_format: { exclude_cents: true }
+#   validates :amount, money_format: { exclude_cents: true, allow_negative: true }
 #   validates :amount, money_format: true, presence: true # required
 class MoneyFormatValidator < ActiveModel::EachValidator
   MONEY_REGEX = /\A[-+]?\d+(\.\d{1,2})?\z/
@@ -40,9 +43,18 @@ class MoneyFormatValidator < ActiveModel::EachValidator
     if options[:exclude_cents] && value_has_cents?(value)
       record.errors.add(attr_name, :money_format_has_cents)
     end
+
+    # Check if value is negative but shouldn't
+    if value_is_negative?(value)
+      record.errors.add(attr_name, :money_format_is_negative) unless options[:allow_negative]
+    end
   end
 
   def value_has_cents?(value)
     BigDecimal.new(value.to_i) != BigDecimal.new(value)
+  end
+
+  def value_is_negative?(value)
+    value.to_i < 0
   end
 end

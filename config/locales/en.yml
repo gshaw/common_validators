@@ -5,6 +5,7 @@ en:
       email_format: "is invalid"
       money_format: "is invalid"
       money_format_has_cents: "must not include cents"
+      money_format_is_negative: "must not be negative"
       phone_number_format: "is invalid"
       slug_format: "is invalid, only lowercase letters and numbers allowed"
       url_format: "is invalid"

@@ -3,10 +3,11 @@ require File.expand_path("../../../app/validators/money_format_validator",  __FI
 
 class TestModel
   include ActiveModel::Validations
-  attr_accessor :amount, :whole_amount
+  attr_accessor :amount, :whole_amount, :negative_amount
 
   validates :amount, money_format: true
   validates :whole_amount, money_format: { exclude_cents: true }
+  validates :negative_amount, money_format: { allow_negative: true }
 end
 
 class MoneyFormatValidatorTest < ActiveSupport::TestCase
@@ -29,6 +30,7 @@ class MoneyFormatValidatorTest < ActiveSupport::TestCase
     assert_invalid_amount "1,000.12"
     assert_invalid_amount "1000000.999"
     assert_invalid_amount 100.999
+    assert_invalid_amount -1
     assert_invalid_amount BigDecimal.new("100.999")
 
     assert_invalid_amount "100.99", :whole_amount
@@ -42,7 +44,7 @@ class MoneyFormatValidatorTest < ActiveSupport::TestCase
     assert_valid_amount "1.00"
     assert_valid_amount "1.99"
     assert_valid_amount "+1.99"
-    assert_valid_amount "-1.99"
+    assert_valid_amount "-1.99", :negative_amount
     assert_valid_amount "100000000.99"
     assert_valid_amount 100
     assert_valid_amount 100.99
