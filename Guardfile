@@ -5,6 +5,6 @@ guard :minitest do
   watch(%r{^test/.+_test\.rb$})
   watch('test/test_helper.rb') { "test" }
 
-  watch(%r{^app/models/(.+)\.rb$})     { |m| "test/#{m[1]}_test.rb" }
-  watch(%r{^app/validators/(.+)\.rb$}) { |m| "test/#{m[1]}_test.rb" }
+  watch(%r{^app/models/(.+)\.rb$})     { |m| "test/models/#{m[1]}_test.rb" }
+  watch(%r{^app/validators/(.+)\.rb$}) { |m| "test/models/#{m[1]}_test.rb" }
 end

@@ -9,7 +9,12 @@
 #   validates :email, email_format: true                 # optional
 #   validates :email, email_format: true, presence: true # required
 class EmailFormatValidator < ActiveModel::EachValidator
-  EMAIL_REGEX = /\A(([^(),:;<>@\[\\\]\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))?\z/i
+  # Local part is basically a-z 0-9 and common symbols
+  # http://en.wikipedia.org/wiki/E-mail_address#Local_part
+  #
+  # Domain part is basically any unicode character while the TLD is still
+  # restricted to at least two characters in range of a-z
+  EMAIL_REGEX = /\A(([a-zA-Z0-9+_!#$%&'*+~=\/\{\}\|\`\^\?\-\.]+)@((?:[^(),:;<>@\[\\\]\s\.]+\.)+[a-z]{2,}))?\z/i
 
   def validate_each(record, attr_name, value)
     return if value.blank?

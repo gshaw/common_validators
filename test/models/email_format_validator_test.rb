@@ -43,11 +43,18 @@ class EmailFormatValidatorTest < ActiveSupport::TestCase
     assert_invalid_email "a[lice@example.com"
     assert_invalid_email "a\\lice@example.com"
     assert_invalid_email "a]lice@example.com"
+
+    # this causes Ruby email library to crash
+    assert_invalid_email "momodk1é@hotmail.fr"
   end
 
   test "valid email" do
     assert_valid_email ""
     assert_valid_email "alice@example.com"
+    assert_valid_email "alice+spam@example.com"
     assert_valid_email "alice@example.com"
+    assert_valid_email "ALICE_123@example.com"
+    assert_valid_email "ann.other@example.com"
+    assert_valid_email "hei@やる.ca"
   end
 end
